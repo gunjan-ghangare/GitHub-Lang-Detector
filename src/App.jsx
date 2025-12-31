@@ -29,41 +29,53 @@ export default function App() {
   }, []);
 
   const fetchData = async (userToFetch = username) => {
-    if (!userToFetch) return;
+    if (!userToFetch?.trim()) {
+      setError("Please enter a GitHub username first.");
+      return;
+    }
     
     setLoading(true);
     setError(null);
     setData(null);
 
     try {
-      const headers = {};
+      const headers = { Accept: 'application/vnd.github+json' };
       if (token) {
         headers.Authorization = `Bearer ${token}`;
       }
 
-      // Fetch public repos (up to 100 per page)
-      const response = await fetch(`https://api.github.com/users/${userToFetch}/repos?per_page=100&sort=updated`, {
-        headers
-      });
-      
-      if (!response.ok) {
-        if (response.status === 404) throw new Error("User not found. Check the username.");
-        if (response.status === 403) throw new Error("API Rate limit exceeded. Wait a while or add a GitHub Token below.");
-        if (response.status === 401) throw new Error("Invalid GitHub Token.");
-        throw new Error(`GitHub API Error: ${response.status} ${response.statusText}`);
+      // Fetch all public repos with pagination (GitHub caps at 100 per page)
+      const perPage = 100;
+      let page = 1;
+      let allRepos = [];
+
+      while (true) {
+        const response = await fetch(`https://api.github.com/users/${userToFetch}/repos?per_page=${perPage}&sort=updated&page=${page}`, { headers });
+        
+        if (!response.ok) {
+          if (response.status === 404) throw new Error("User not found. Check the username.");
+          if (response.status === 403) throw new Error("API Rate limit exceeded. Wait a while or add a GitHub Token below.");
+          if (response.status === 401) throw new Error("Invalid GitHub Token.");
+          throw new Error(`GitHub API Error: ${response.status} ${response.statusText}`);
+        }
+
+        const repos = await response.json();
+        allRepos = allRepos.concat(repos);
+
+        // Stop if we received fewer than a full page or after a safe max of 10 pages to prevent runaway loops
+        if (repos.length < perPage || page >= 10) break;
+        page += 1;
       }
 
-      const repos = await response.json();
-      setRepoCount(repos.length);
+      setRepoCount(allRepos.length);
 
-      if (repos.length === 0) {
+      if (allRepos.length === 0) {
         throw new Error("No public repositories found for this user.");
       }
 
-      // Process languages
       const langMap = {};
       let hasLang = false;
-      repos.forEach(repo => {
+      allRepos.forEach(repo => {
         if (repo.language) {
           langMap[repo.language] = (langMap[repo.language] || 0) + 1;
           hasLang = true;
@@ -74,10 +86,9 @@ export default function App() {
          throw new Error("Repositories found, but no language data detected.");
       }
 
-      // Convert to array for Recharts
       const processedData = Object.keys(langMap)
         .map(lang => ({ name: lang, value: langMap[lang] }))
-        .sort((a, b) => b.value - a.value); // Sort by usage
+        .sort((a, b) => b.value - a.value);
 
       setData(processedData);
     } catch (err) {
