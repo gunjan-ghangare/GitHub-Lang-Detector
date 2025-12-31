@@ -375,7 +375,7 @@ export default function App() {
             </a>
 
             <a 
-              href="https://linkedin.com/in/gunjan-ghangare" 
+              href="https://linkedin.com/in/gunjanghangare" 
               target="_blank" 
               rel="noopener noreferrer"
               className="group flex flex-col items-center gap-2 text-slate-400 hover:text-blue-400 transition-colors"
@@ -388,7 +388,7 @@ export default function App() {
             </a>
 
             <a 
-              href="https://instagram.com/gunjan-ghangare" 
+              href="https://instagram.com/gunjanghangare_" 
               target="_blank" 
               rel="noopener noreferrer"
               className="group flex flex-col items-center gap-2 text-slate-400 hover:text-pink-500 transition-colors"
