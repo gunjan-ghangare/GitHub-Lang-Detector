@@ -126,7 +126,7 @@ export default function App() {
       }
     } catch (e) {
       // Fallback for when copying link from localhost or sandbox
-      appUrl = `https://gunjan-ghangare.github.io/gitlang-detector/?user=${username}`;
+      appUrl = `https://gunjan-ghangare.github.io/GitHub-Lang-Detector/?user=${username}`;
     }
     return `[![My Top Languages](https://img.shields.io/badge/View%20My-Top%20Languages-blue?style=for-the-badge&logo=github)](${appUrl})`;
   };
