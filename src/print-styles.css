@@ -1,0 +1,271 @@
+/* ===== PRINT STYLES FOR GITLANG DETECTOR ===== */
+@media print {
+  /* Hide unnecessary elements */
+  form,
+  button,
+  [class*="search"],
+  .max-w-xl,
+  footer,
+  .mt-auto,
+  [class*="Creator"],
+  [class*="creator"],
+  .text-slate-500,
+  .absolute,
+  .fixed {
+    display: none !important;
+  }
+
+  /* Set up page for print */
+  * {
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  body {
+    background: white !important;
+    color: #000 !important;
+    margin: 0;
+    padding: 20px;
+    font-size: 12pt;
+  }
+
+  /* Headers and text - dark for print */
+  h1, h2, h3, h4, h5, h6 {
+    color: #000 !important;
+    page-break-after: avoid;
+    margin-top: 15px;
+    margin-bottom: 10px;
+  }
+
+  h1 {
+    font-size: 24pt;
+    margin-bottom: 15px;
+  }
+
+  h2 {
+    font-size: 18pt;
+    margin-top: 20px;
+  }
+
+  h3 {
+    font-size: 14pt;
+  }
+
+  p {
+    color: #333 !important;
+    orphans: 3;
+    widows: 3;
+    margin-bottom: 10px;
+    line-height: 1.5;
+  }
+
+  /* Container and cards */
+  div[class*="min-h-screen"],
+  [class*="bg-gradient-to"],
+  [class*="bg-slate-800"],
+  [class*="bg-slate-900"],
+  [class*="bg-slate-950"] {
+    background: white !important;
+    color: #000 !important;
+  }
+
+  /* Remove all animations */
+  .animate-fade-in,
+  .animate-slide-in,
+  .animate-glow,
+  .animate-float,
+  [class*="animate"] {
+    animation: none !important;
+  }
+
+  /* Remove gradients - convert to simple backgrounds */
+  [class*="bg-gradient"],
+  [class*="from-"],
+  [class*="to-"],
+  [class*="via-"] {
+    background: #f5f5f5 !important;
+  }
+
+  /* Text color fixes for print */
+  [class*="text-white"],
+  [class*="text-slate"],
+  [class*="text-blue"],
+  [class*="text-purple"],
+  [class*="text-pink"],
+  [class*="text-emerald"],
+  [class*="text-yellow"],
+  [class*="text-cyan"],
+  [class*="text-orange"],
+  [class*="text-red"],
+  [class*="text-green"],
+  [class*="text-sky"] {
+    color: #000 !important;
+  }
+
+  /* Borders - make them visible for print */
+  [class*="border"] {
+    border-color: #666 !important;
+    border-width: 1px !important;
+  }
+
+  /* Remove blur, opacity effects */
+  [class*="backdrop"],
+  [class*="blur"],
+  [class*="shadow"] {
+    backdrop-filter: none !important;
+    filter: none !important;
+    opacity: 1 !important;
+    box-shadow: none !important;
+  }
+
+  /* Images and SVGs */
+  img {
+    max-width: 100%;
+    height: auto;
+    page-break-inside: avoid;
+    border: 1px solid #ccc;
+    margin: 10px 0;
+  }
+
+  svg {
+    max-width: 100%;
+    height: auto;
+    page-break-inside: avoid;
+  }
+
+  /* Links - make them underlined */
+  a {
+    color: #0066cc !important;
+    text-decoration: underline;
+  }
+
+  a[href]::after {
+    content: " (" attr(href) ")";
+    font-size: 10pt;
+    color: #666;
+  }
+
+  /* Stats boxes styling */
+  [class*="from-blue-900"],
+  [class*="from-purple-900"],
+  [class*="from-emerald-900"],
+  [class*="from-pink-900"],
+  [class*="from-yellow-900"],
+  [class*="from-orange-900"],
+  [class*="from-cyan-900"],
+  [class*="bg-slate-700"],
+  [class*="bg-slate-600"] {
+    background: #f0f0f0 !important;
+    border: 2px solid #333 !important;
+    color: #000 !important;
+    padding: 10px !important;
+    margin: 10px 0;
+  }
+
+  /* Tables */
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 10px 0;
+  }
+
+  td, th {
+    border: 1px solid #999;
+    padding: 8px;
+    color: #000;
+    text-align: left;
+  }
+
+  th {
+    background: #e0e0e0 !important;
+    font-weight: bold;
+  }
+
+  /* Code blocks */
+  code,
+  pre {
+    background: #f5f5f5 !important;
+    color: #000 !important;
+    border: 1px solid #ccc;
+    padding: 8px;
+    overflow-x: auto;
+    font-family: 'Courier New', monospace;
+    font-size: 10pt;
+  }
+
+  /* Prevent page breaks inside cards */
+  [class*="bg-gradient-to-br"],
+  [class*="rounded-2xl"],
+  [class*="rounded-xl"],
+  [class*="rounded-lg"] {
+    page-break-inside: avoid;
+    margin-bottom: 20px;
+    padding: 10px;
+  }
+
+  /* Grid layouts for print */
+  [class*="grid md:grid-cols-2"],
+  [class*="grid md:grid-cols-3"],
+  [class*="grid md:grid-cols-4"],
+  [class*="grid grid-cols"],
+  [class*="grid"] {
+    display: block !important;
+  }
+
+  [class*="grid"] > div {
+    page-break-inside: avoid;
+    margin-bottom: 20px;
+    width: 100% !important;
+  }
+
+  /* Max width for readability */
+  [class*="max-w-6xl"],
+  [class*="max-w"],
+  [class*="max-w-xl"] {
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+
+  /* Profile image styling */
+  img[class*="w-32"],
+  img[class*="rounded-full"] {
+    border: 2px solid #000;
+    max-width: 120px;
+    margin: 10px 0;
+  }
+
+  /* Clean up spacing */
+  * {
+    margin-top: 0;
+  }
+
+  /* Ensure text is readable - override any inline styles */
+  body, p, span, div, a {
+    color: #000 !important;
+    background: white !important;
+  }
+
+  /* Flex containers */
+  [class*="flex"] {
+    display: flex !important;
+    flex-wrap: wrap;
+  }
+
+  /* Special handling for profile section */
+  [class*="md:col-span"] {
+    width: 100% !important;
+    page-break-inside: avoid;
+  }
+
+  /* Line breaks for readability */
+  hr {
+    border: 1px solid #999;
+    margin: 15px 0;
+  }
+}
+
+@page {
+  margin: 0.5in;
+  orphans: 3;
+  widows: 3;
+}
